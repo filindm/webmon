@@ -29,3 +29,6 @@ webmon consume -k <Kafka URL> -t test-topic-1 -d <PostgreSQL URL>
 
 webmon produce -k <Kafka URL> -t test-topic-1 -w https://aiven.io -r Aiven
 ```
+
+## Know issues and limitations
+- The tool currently supports only SSL for both Kafka and PostgreSQL.
