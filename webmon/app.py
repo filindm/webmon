@@ -42,10 +42,13 @@ def run_producer(kafka_urls, topic, website_url, regexp, cafile, certfile, keyfi
         ssl_keyfile=keyfile,
     )
     while True:
-        msg = check_website(website_url, regexp)
-        print('sending {}'.format(msg))
-        producer.send(topic, json.dumps(msg).encode())
-        producer.flush()
+        try:
+            msg = check_website(website_url, regexp)
+            print('sending {}'.format(msg))
+            producer.send(topic, json.dumps(msg).encode())
+            producer.flush()
+        except Exception as ex:
+            print('Exception while accessing {}: {}'.format(website_url, ex))
         time.sleep(5)
 
 
